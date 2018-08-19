@@ -6,10 +6,8 @@ import java.io.IOException;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
@@ -42,7 +40,7 @@ public class TestBase {
 		if (browserName.equals("chrome")) {
 			System.setProperty("webdriver.chrome.driver", "servicenow\\src\\main\\java\\com\\atos\\servicenow\\drivers\\chromedriver.exe");
 			driver = new ChromeDriver();
-		} else if (browserName.equals("FF")) {
+		} else if (browserName.equals("Firefox")) {
 			System.setProperty("webdriver.gecko.driver", "servicenow\\src\\main\\java\\com\\atos\\servicenow\\drivers\\geckodriver.exe");
 			driver = new FirefoxDriver();
 		}
