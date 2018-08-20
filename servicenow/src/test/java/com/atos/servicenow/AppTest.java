@@ -61,7 +61,7 @@ public class AppTest {
 		test = extent.createTest("Login Test");
 	}
 
-	@AfterMethod
+
 	@AfterMethod
 	public void tearDown(ITestResult result) {
 		if(result.getStatus()==ITestResult.FAILURE)

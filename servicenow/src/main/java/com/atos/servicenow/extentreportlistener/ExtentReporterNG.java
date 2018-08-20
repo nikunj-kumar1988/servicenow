@@ -18,62 +18,73 @@ import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.xml.XmlSuite;
 
-import com.relevantcodes.extentreports.ExtentReports;
-import com.relevantcodes.extentreports.ExtentTest;
-import com.relevantcodes.extentreports.LogStatus;
-
-public class ExtentReporterNG implements IReporter {
-	private ExtentReports extent;
-
-	public void generateReport(List<XmlSuite> xmlSuites, List<ISuite> suites,
-			String outputDirectory) {
-		extent = new ExtentReports(outputDirectory + File.separator
-				+ "Extent.html", true);
-
-		for (ISuite suite : suites) {
-			Map<String, ISuiteResult> result = suite.getResults();
-
-			for (ISuiteResult r : result.values()) {
-				ITestContext context = r.getTestContext();
-
-				buildTestNodes(context.getPassedTests(), LogStatus.PASS);
-				buildTestNodes(context.getFailedTests(), LogStatus.FAIL);
-				buildTestNodes(context.getSkippedTests(), LogStatus.SKIP);
-			}
-		}
-
-		extent.flush();
-		extent.close();
-	}
-
-	private void buildTestNodes(IResultMap tests, LogStatus status) {
-		ExtentTest test;
-
-		if (tests.size() > 0) {
-			for (ITestResult result : tests.getAllResults()) {
-				test = extent.startTest(result.getMethod().getMethodName());
-
-				test.setStartedTime(getTime(result.getStartMillis()));
-				test.setEndedTime(getTime(result.getEndMillis()));
-
-				for (String group : result.getMethod().getGroups())
-					test.assignCategory(group);
-
-				if (result.getThrowable() != null) {
-					test.log(status, result.getThrowable());
-				} else {
-					test.log(status, "Test " + status.toString().toLowerCase()
-							+ "ed");
-				}
-
-				extent.endTest(test);
-			}
-		}
-	}
-
-	private Date getTime(long millis) {
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTimeInMillis(millis);
-		return calendar.getTime();
-	}
+public class ExtentReporterNG {
+	 ExtentHtmlReporter htmlReporter;
+	    ExtentReports extent;
+	    ExtentTest test;
+	         
+	    @BeforeTest
+	    public void startReport()
+	    {
+	        htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") +"/test-output/MyOwnReport.html");
+	        extent = new ExtentReports();
+	        extent.attachReporter(htmlReporter);
+	         
+	        extent.setSystemInfo("OS", "Mac Sierra");
+	        extent.setSystemInfo("Host Name", "Krishna");
+	        extent.setSystemInfo("Environment", "QA");
+	        extent.setSystemInfo("User Name", "Krishna Sakinala");
+	         
+	        htmlReporter.config().setChartVisibilityOnOpen(true);
+	        htmlReporter.config().setDocumentTitle("AutomationTesting.in Demo Report");
+	        htmlReporter.config().setReportName("My Own Report");
+	        htmlReporter.config().setTestViewChartLocation(ChartLocation.TOP);
+	        htmlReporter.config().setTheme(Theme.DARK);
+	    }
+	     
+	    @Test
+	    public void demoTestPass()
+	    {
+	        test = extent.createTest("demoTestPass", "This test will demonstrate the PASS test case");
+	        Assert.assertTrue(true);
+	    }
+	     
+	    @Test
+	    public void demoTestFail()
+	    {
+	        test = extent.createTest("demoTestFail", "This test will demonstrate the FAIL test case");
+	        Assert.assertTrue(false);
+	    }
+	     
+	    @Test
+	    public void demoTestSkip()
+	    {
+	        test = extent.createTest("demoTestSkip", "This test will demonstrate the SKIP test case");
+	        throw new SkipException("This test case not ready for execution");
+	    }
+	     
+	    @AfterMethod
+	    public void getResult(ITestResult result)
+	    {
+	        if(result.getStatus() == ITestResult.FAILURE)
+	        {
+	            test.log(Status.FAIL, MarkupHelper.createLabel(result.getName()+" Test case FAILED due to below issues:", ExtentColor.RED));
+	            test.fail(result.getThrowable());
+	        }
+	        else if(result.getStatus() == ITestResult.SUCCESS)
+	        {
+	            test.log(Status.PASS, MarkupHelper.createLabel(result.getName()+" Test Case PASSED", ExtentColor.GREEN));
+	        }
+	        else
+	        {
+	            test.log(Status.SKIP, MarkupHelper.createLabel(result.getName()+" Test Case SKIPPED", ExtentColor.ORANGE));
+	            test.skip(result.getThrowable());
+	        }
+	    }
+	     
+	    @AfterTest
+	    public void tearDown()
+	    {
+	        extent.flush();
+	    }
 }
