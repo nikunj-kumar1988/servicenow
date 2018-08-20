@@ -1,5 +1,9 @@
 package com.atos.servicenow;
 
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.Test;
+import org.testng.Assert;
+import org.testng.AssertJUnit;
 import java.io.IOException;
 
 import org.apache.bcel.classfile.Utility;
@@ -41,7 +45,7 @@ public class AppTest {
 		test.info("This step shows usage of info(details)");
 
 		// log with snapshot
-		test.fail("details", MediaEntityBuilder.createScreenCaptureFromPath("screenshot.png").build());
+		Assert.fail("details", MediaEntityBuilder.createScreenCaptureFromPath("screenshot.png").build());
 
 		// test with snapshot
 		test.addScreenCaptureFromPath("screenshot.png");
@@ -58,12 +62,13 @@ public class AppTest {
 	}
 
 	@AfterMethod
+	@AfterMethod
 	public void tearDown(ITestResult result) {
 		if(result.getStatus()==ITestResult.FAILURE)
 		{
 			Object driver;
 			String temp = Utility.getScreenshot(driver);
-			test.fail(result.getThrowable().getMessage(),MediaEntityBuilder.createScreenCaptureFromPath(temp).build());
+			Assert.fail(result.getThrowable().getMessage(),MediaEntityBuilder.createScreenCaptureFromPath(temp).build());
 		}
 		extent.flush();
 	}
@@ -74,6 +79,6 @@ public class AppTest {
 		driver = new Chromedriver();
 		driver.get("https://www.google.com");
 		System.out.println("test ");
-		Assert.assertTrue(driver.getTitle().contains("mukesh"));
+		AssertJUnit.assertTrue(driver.getTitle().contains("mukesh"));
 	}
 }

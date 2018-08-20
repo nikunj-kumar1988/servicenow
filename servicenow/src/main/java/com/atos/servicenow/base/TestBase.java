@@ -36,12 +36,20 @@ public class TestBase {
 
 	public static void initialization() {
 		String browserName = prop.getProperty("browser");
-
+		
+		 String workingDir = System.getProperty("user.dir");
+		   System.out.println("Current working directory : " + workingDir);
+		   String path = workingDir + "\\src\\main\\java\\com\\atos\\servicenow\\drivers\\chromedriver.exe";
+		   System.out.println("path = " + path);
+		   //C:\SERVICENOW\servicenow\servicenow\src\main\java\com\atos\servicenow\drivers
+		   
 		if (browserName.equals("chrome")) {
-			System.setProperty("webdriver.chrome.driver", "servicenow\\src\\main\\java\\com\\atos\\servicenow\\drivers\\chromedriver.exe");
+			System.out.println("Inside chrome");
+			System.setProperty("webdriver.chrome.driver", workingDir + "\\src\\main\\java\\com\\atos\\servicenow\\drivers\\chromedriver.exe");
+			
 			driver = new ChromeDriver();
 		} else if (browserName.equals("Firefox")) {
-			System.setProperty("webdriver.gecko.driver", "servicenow\\src\\main\\java\\com\\atos\\servicenow\\drivers\\geckodriver.exe");
+			System.setProperty("webdriver.gecko.driver",  workingDir + "\\src\\main\\java\\com\\atos\\servicenow\\drivers\\geckodriver.exe");
 			driver = new FirefoxDriver();
 		}
 

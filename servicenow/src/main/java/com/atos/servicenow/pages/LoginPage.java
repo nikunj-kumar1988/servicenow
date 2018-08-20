@@ -10,20 +10,20 @@ import com.atos.servicenow.base.TestBase;
 public class LoginPage extends TestBase{
 	
 	//Page Factory - OR:
-	@FindBy(name="username")
+	@FindBy(id="user_name")
 	WebElement username;
 	
-	@FindBy(name="password")
+	@FindBy(id="user_password")
 	WebElement password;
 	
-	@FindBy(xpath="//input[@type='submit']")
-	WebElement loginBtn;
+	@FindBy(xpath=".//*[@id='remembermeoption']/span/label")
+	WebElement rememberMe;
 	
-	@FindBy(xpath="//button[contains(text(),'Sign Up')]")
-	WebElement signUpBtn;
+	@FindBy(id="sysverb_login")
+	WebElement loginButton;
 	
-	@FindBy(xpath="//img[contains(@class,'img-responsive')]")
-	WebElement crmLogo;
+	@FindBy(linkText="Forgot Password ?")
+	WebElement forgotPassword;
 	
 	//Initializing the Page Objects:
 	public LoginPage(){
@@ -35,16 +35,16 @@ public class LoginPage extends TestBase{
 		return driver.getTitle();
 	}
 	
-	public boolean validateCRMImage(){
+	/*public boolean validateCRMImage(){
 		return crmLogo.isDisplayed();
-	}
+	}*/
 	
 	public HomePage login(String un, String pwd){
 		username.sendKeys(un);
 		password.sendKeys(pwd);
 		//loginBtn.click();
 		    	JavascriptExecutor js = (JavascriptExecutor)driver;
-		    	js.executeScript("arguments[0].click();", loginBtn);
+		    	js.executeScript("arguments[0].click();", loginButton);
 		    	
 		    	
 		    
