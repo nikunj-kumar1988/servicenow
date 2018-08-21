@@ -8,7 +8,7 @@ import com.atos.servicenow.extent.ExtentManager;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 
-public class TestListener implements ITestListener {
+public class ExtentTestListener implements ITestListener {
 
 	// Extent Report Declarations
 	private static ExtentReports extent = ExtentManager.createInstance();
