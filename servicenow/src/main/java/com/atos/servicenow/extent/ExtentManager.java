@@ -32,7 +32,7 @@ public class ExtentManager {
 		ExtentHtmlReporter htmlReporter = new ExtentHtmlReporter(fileName);
 		htmlReporter.config().setTestViewChartLocation(ChartLocation.BOTTOM);
 		htmlReporter.config().setChartVisibilityOnOpen(true);
-		htmlReporter.config().setTheme(Theme.STANDARD);
+		htmlReporter.config().setTheme(Theme.DARK);
 		htmlReporter.config().setDocumentTitle(fileName);
 		htmlReporter.config().setEncoding("utf-8");
 		htmlReporter.config().setReportName(fileName);
@@ -92,14 +92,4 @@ public class ExtentManager {
 		}
 		return platform;
 	}
-
-	/*
-	 * private static ExtentHtmlReporter htmlReporter; private static ExtentReports
-	 * extent;
-	 * 
-	 * public synchronized static ExtentReports getReporter() { if (extent == null)
-	 * { htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") +
-	 * "/test-output/ExtentReport.html"); extent = new ExtentReports();
-	 * extent.attachReporter(htmlReporter); } return extent; }
-	 */
 }
