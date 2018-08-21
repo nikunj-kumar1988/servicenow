@@ -29,19 +29,20 @@ public class LoginPageTest extends TestBase {
 	@BeforeMethod
 	public void setUp() {
 		initialization();
-		extent = getExtentReference();
-		test = extent.createTest("LoginPageTest");
+		//extent = new ExtentReports();
+		//test = extent.createTest("LoginPageTest");
 		loginPage = new LoginPage();
-		test.log(Status.INFO, MarkupHelper.createLabel("Setup is Done", ExtentColor.YELLOW));
+		//test.log(Status.INFO, MarkupHelper.createLabel("Setup is Done", ExtentColor.YELLOW));
 	}
 
 	@Test(priority = 1)
 	public void loginPageTitleTest() {
-		test = extent.createTest("LoginPageTitleTest");
+		//extent = getExtent();
+		//test = extent.createTest("LoginPage Test ","XXXXX");
 		String title = loginPage.validateLoginPageTitle();
 		System.out.println(title);
 		Assert.assertEquals(title, "ServiceNow IT Service Management Suite - IT-Guardian Development");
-		test.log(Status.PASS, MarkupHelper.createLabel("loginPageTitleTest is OK", ExtentColor.GREEN));
+		//test.log(Status.PASS, MarkupHelper.createLabel("loginPageTitleTest is OK", ExtentColor.GREEN));
 	}
 
 	/*@Test(priority = 2)
@@ -53,17 +54,17 @@ public class LoginPageTest extends TestBase {
 	@Test(priority = 3)
 	public void loginTest() {
 		homePage = loginPage.login(prop.getProperty("username"), prop.getProperty("password"));
-		test = extent.createTest("LoginTest");
-		test.log(Status.PASS, MarkupHelper.createLabel("Login is OK", ExtentColor.GREEN));
+		//test = extent.createTest("LoginTest");
+		//test.log(Status.PASS, MarkupHelper.createLabel("Login is OK", ExtentColor.GREEN));
 	}
 
 
 	@AfterMethod
 	public void tearDown() {
 		driver.quit();
-		test = extent.createTest("Browser Closed");
-		flushExtentReference();
-		test.log(Status.PASS, MarkupHelper.createLabel("Login is OK", ExtentColor.GREEN));
+		//test = extent.createTest("Browser Closed");
+		//flushExtentReference();
+		//test.log(Status.PASS, MarkupHelper.createLabel("Login is OK", ExtentColor.GREEN));
 	}
 
 }

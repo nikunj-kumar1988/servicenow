@@ -74,27 +74,4 @@ public class TestBase {
 		driver.get(prop.getProperty("url"));
 	}
 
-	public static ExtentReports getExtentReference() {
-		htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "/test-output/MyOwnReport.html");
-		extent = new ExtentReports();
-		extent.attachReporter(htmlReporter);
-
-		extent.setSystemInfo("OS", "Nikunj Desktop");
-		extent.setSystemInfo("Host Name", "Nikunj");
-		extent.setSystemInfo("Environment", "QA");
-		extent.setSystemInfo("User Name", "Nikunj Kumar");
-
-		htmlReporter.config().setChartVisibilityOnOpen(true);
-		htmlReporter.config().setDocumentTitle("AutomationTesting.in Demo Report");
-		htmlReporter.config().setReportName("My Own Report");
-		htmlReporter.config().setTestViewChartLocation(ChartLocation.TOP);
-		htmlReporter.config().setTheme(Theme.DARK);
-
-		return extent;
-	}
-
-	public static void flushExtentReference() {
-		extent.flush();
-	}
-
 }

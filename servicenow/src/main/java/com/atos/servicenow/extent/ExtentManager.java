@@ -11,9 +11,10 @@ import com.aventstack.extentreports.reporter.configuration.Theme;
 
 public class ExtentManager {
 
+	private static ExtentHtmlReporter htmlReporter;
 	private static ExtentReports extent;
 	private static Platform platform;
-	private static String reportFileName = "ExtentReports-Version3-Test-Automaton-Report.html";
+	private static String reportFileName = "ServiceNow Test Automation Report.html";
 	private static String macPath = System.getProperty("user.dir") + "/TestReport";
 	private static String windowsPath = System.getProperty("user.dir") + "\\TestReport";
 	private static String macReportFileLoc = macPath + "/" + reportFileName;
@@ -29,13 +30,13 @@ public class ExtentManager {
 	public static ExtentReports createInstance() {
 		platform = getCurrentPlatform();
 		String fileName = getReportFileLocation(platform);
-		ExtentHtmlReporter htmlReporter = new ExtentHtmlReporter(fileName);
+		htmlReporter = new ExtentHtmlReporter(fileName);
 		htmlReporter.config().setTestViewChartLocation(ChartLocation.BOTTOM);
 		htmlReporter.config().setChartVisibilityOnOpen(true);
 		htmlReporter.config().setTheme(Theme.DARK);
-		htmlReporter.config().setDocumentTitle(fileName);
+		htmlReporter.config().setDocumentTitle("SERVICENOW-Regression");
 		htmlReporter.config().setEncoding("utf-8");
-		htmlReporter.config().setReportName(fileName);
+		htmlReporter.config().setReportName("SERVICE-NOW Regression Tests");
 
 		extent = new ExtentReports();
 		extent.attachReporter(htmlReporter);
