@@ -9,17 +9,17 @@ import org.testng.annotations.Test;
 import com.atos.servicenow.base.TestBase;
 import com.atos.servicenow.pages.HomePage;
 import com.atos.servicenow.pages.LoginPage;
-import com.aventstack.extentreports.ExtentReports;
+/*import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.markuputils.ExtentColor;
-import com.aventstack.extentreports.markuputils.MarkupHelper;
+import com.aventstack.extentreports.markuputils.MarkupHelper;*/
 
 public class LoginPageTest extends TestBase {
 	LoginPage loginPage;
 	HomePage homePage;
-	ExtentReports extent;
-	ExtentTest test;
+	//ExtentReports extent;
+	//ExtentTest test;
 
 	public LoginPageTest() {
 		super();
