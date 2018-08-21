@@ -2,8 +2,10 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Suite">
 	<listeners>
-		<listener class-name="com.atos.servicenow.listeners.TestListener" />
-		<!-- <listener class-name="com.atos.servicenow.listeners.ListenerTestNGReporter" /> -->
+		<listener
+			class-name="com.atos.servicenow.listeners.ExtentTestListener" />
+		<listener
+			class-name="com.atos.servicenow.listeners.ListenerTestNGReporter" />
 	</listeners>
 	<test thread-count="5" name="Test">
 		<classes>
