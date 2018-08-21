@@ -3,6 +3,7 @@
 <suite name="Suite">
 	<listeners>
 		<listener class-name="com.atos.servicenow.extentreportlistener.ListenerTest" />
+		<listener class-name="com.atos.servicenow.extentreportlistener.ListenerExtentReporter" />
 	</listeners>
 	<test thread-count="5" name="Test">
 		<classes>

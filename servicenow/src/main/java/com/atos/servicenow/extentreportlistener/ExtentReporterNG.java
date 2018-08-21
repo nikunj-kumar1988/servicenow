@@ -18,8 +18,12 @@ import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.xml.XmlSuite;
 
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
+
 public class ExtentReporterNG {
-	 ExtentHtmlReporter htmlReporter;
+	    ExtentHtmlReporter htmlReporter;
 	    ExtentReports extent;
 	    ExtentTest test;
 	         
