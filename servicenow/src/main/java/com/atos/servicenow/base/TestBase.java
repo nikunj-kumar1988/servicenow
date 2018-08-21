@@ -13,6 +13,11 @@ import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 import com.atos.servicenow.util.TestUtil;
 import com.atos.servicenow.util.WebEventListener;
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
+import com.aventstack.extentreports.reporter.configuration.ChartLocation;
+import com.aventstack.extentreports.reporter.configuration.Theme;
 
 public class TestBase {
 
@@ -20,6 +25,9 @@ public class TestBase {
 	public static Properties prop;
 	public static EventFiringWebDriver e_driver;
 	public static WebEventListener eventListener;
+	public static ExtentHtmlReporter htmlReporter;
+	public static ExtentReports extent;
+	public static ExtentTest test;
 
 	public TestBase() {
 		try {
@@ -64,7 +72,29 @@ public class TestBase {
 		driver.manage().timeouts().implicitlyWait(TestUtil.IMPLICIT_WAIT, TimeUnit.SECONDS);
 
 		driver.get(prop.getProperty("url"));
+	}
 
+	public static ExtentReports getExtentReference() {
+		htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "/test-output/MyOwnReport.html");
+		extent = new ExtentReports();
+		extent.attachReporter(htmlReporter);
+
+		extent.setSystemInfo("OS", "Nikunj Desktop");
+		extent.setSystemInfo("Host Name", "Nikunj");
+		extent.setSystemInfo("Environment", "QA");
+		extent.setSystemInfo("User Name", "Nikunj Kumar");
+
+		htmlReporter.config().setChartVisibilityOnOpen(true);
+		htmlReporter.config().setDocumentTitle("AutomationTesting.in Demo Report");
+		htmlReporter.config().setReportName("My Own Report");
+		htmlReporter.config().setTestViewChartLocation(ChartLocation.TOP);
+		htmlReporter.config().setTheme(Theme.DARK);
+
+		return extent;
+	}
+
+	public static void flushExtentReference() {
+		extent.flush();
 	}
 
 }
