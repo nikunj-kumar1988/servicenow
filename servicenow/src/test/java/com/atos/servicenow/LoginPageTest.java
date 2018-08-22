@@ -41,8 +41,9 @@ public class LoginPageTest extends TestBase {
 		//test = extent.createTest("LoginPage Test ","XXXXX");
 		String title = loginPage.validateLoginPageTitle();
 		System.out.println(title);
-		Assert.assertEquals(title, "ServiceNow IT Service Management Suite - IT-Guardian Development");
+		Assert.assertEquals(title, "ServiceNow IT Service Management Suite - IT-Guardian Development...");
 		//test.log(Status.PASS, MarkupHelper.createLabel("loginPageTitleTest is OK", ExtentColor.GREEN));
+		
 	}
 
 	/*@Test(priority = 2)

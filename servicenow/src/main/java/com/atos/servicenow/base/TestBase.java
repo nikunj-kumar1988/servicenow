@@ -1,11 +1,17 @@
 package com.atos.servicenow.base;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -16,8 +22,6 @@ import com.atos.servicenow.util.WebEventListener;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
-import com.aventstack.extentreports.reporter.configuration.ChartLocation;
-import com.aventstack.extentreports.reporter.configuration.Theme;
 
 public class TestBase {
 
@@ -73,5 +77,21 @@ public class TestBase {
 
 		driver.get(prop.getProperty("url"));
 	}
+	
+
+	public static String takeScreenshotAtEndOfTest(String name) throws IOException {
+		File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+		String currentDir = System.getProperty("user.dir");
+		
+		String dateName = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+		String destination = currentDir + "\\screenshots\\" + name + "_" + dateName + ".png";
+		System.out.println("Destination " + destination);
+		
+		File destFile = new File(destination);
+		FileUtils.copyFile(scrFile, destFile);
+		return destination;
+
+	}
+
 
 }
