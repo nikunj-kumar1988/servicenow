@@ -1,12 +1,11 @@
 package com.atos.servicenow;
 
-import org.testng.AssertJUnit;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.atos.servicenow.base.TestBase;
-import com.atos.servicenow.pages.ContactsPage;
 import com.atos.servicenow.pages.HomePage;
 import com.atos.servicenow.pages.LoginPage;
 import com.atos.servicenow.util.TestUtil;
@@ -15,7 +14,7 @@ public class HomePageTest extends TestBase {
 	LoginPage loginPage;
 	HomePage homePage;
 	TestUtil testUtil;
-	ContactsPage contactsPage;
+	// ContactsPage contactsPage;
 
 	public HomePageTest() {
 		super();
@@ -30,7 +29,7 @@ public class HomePageTest extends TestBase {
 	public void setUp() {
 		initialization();
 		testUtil = new TestUtil();
-		contactsPage = new ContactsPage();
+		// contactsPage = new ContactsPage();
 		loginPage = new LoginPage();
 		homePage = loginPage.login(prop.getProperty("username"), prop.getProperty("password"));
 	}
@@ -38,21 +37,27 @@ public class HomePageTest extends TestBase {
 	@Test(priority = 1)
 	public void verifyHomePageTitleTest() {
 		String homePageTitle = homePage.verifyHomePageTitle();
-		AssertJUnit.assertEquals(homePageTitle, "CRMPRO", "Home page title not matched");
+		Assert.assertEquals(homePageTitle,
+				"BCA Dashboard | ServiceNow IT Service Management Suite - IT-Guardian Development");
 	}
 
 	@Test(priority = 2)
 	public void verifyUserNameTest() {
-		testUtil.switchToFrame();
-		AssertJUnit.assertTrue(homePage.verifyCorrectUserName());
+		Boolean usernameDispalyed = homePage.verifyUsernameDisplayed();
+		Assert.assertTrue(usernameDispalyed);
 	}
 
 	@Test(priority = 3)
-	public void verifyContactsLinkTest() {
-		testUtil.switchToFrame();
-		contactsPage = homePage.clickOnContactsLink();
+	public void clickOnCreateNewCall() {
+		homePage.clickCreateNewCall();
+		
+		
 	}
 
+	/*
+	 * @Test(priority = 3) public void verifyContactsLinkTest() {
+	 * testUtil.switchToFrame(); contactsPage = homePage.clickOnContactsLink(); }
+	 */
 
 	@AfterMethod
 	public void tearDown() {

@@ -1,7 +1,6 @@
 package com.atos.servicenow.pages;
 
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -10,64 +9,52 @@ import com.atos.servicenow.base.TestBase;
 
 public class HomePage extends TestBase {
 
-	@FindBy(xpath = "//td[contains(text(),'User: Naveen K')]")
+	@FindBy(xpath = "html/body/div[1]/div/div/header/div[1]/div/div[1]/a")
+	WebElement nokiaLogo;
+
+	@FindBy(xpath = ".//*[@id='user_info_dropdown']/div/span[1]")
+	WebElement loggedInUSerName;
+
+	@FindBy(xpath = "//*[@id='filter']")
 	@CacheLookup
-	WebElement userNameLabel;
+	WebElement filterNavigator;
 
-	@FindBy(xpath = "//a[contains(text(),'Contacts')]")
-	WebElement contactsLink;
-	
-	@FindBy(xpath = "//a[contains(text(),'New Contact')]")
-	WebElement newContactLink;
-	
-
-	@FindBy(xpath = "//a[contains(text(),'Deals')]")
-	WebElement dealsLink;
-
-	@FindBy(xpath = "//a[contains(text(),'Tasks')]")
-	WebElement tasksLink;
+	@FindBy(linkText = ".//*[@id='e32a4f3e95df940094fc2cd59bc40653']/div[1]/div")
+	WebElement createNewCallLink;
 
 	// Initializing the Page Objects:
 	public HomePage() {
 		PageFactory.initElements(driver, this);
 	}
-	
-	public String verifyHomePageTitle(){
+
+	public String verifyHomePageTitle() {
 		return driver.getTitle();
 	}
-	
-	
-	public boolean verifyCorrectUserName(){
-		return userNameLabel.isDisplayed();
+
+	public boolean verifyUsernameDisplayed() {
+		return loggedInUSerName.isDisplayed();
 	}
-	
-	public ContactsPage clickOnContactsLink(){
-		contactsLink.click();
-		return new ContactsPage();
-	}
-	
-	public DealsPage clickOnDealsLink(){
-		dealsLink.click();
-		return new DealsPage();
-	}
-	
-	public TasksPage clickOnTasksLink(){
-		tasksLink.click();
-		return new TasksPage();
-	}
-	
-	public void clickOnNewContactLink(){
-		Actions action = new Actions(driver);
-		action.moveToElement(contactsLink).build().perform();
-		newContactLink.click();
-		
+
+	public void clickCreateNewCall() {
+		createNewCallLink.click();
 	}
 	
 	
 	
 	
-	
-	
-	
+
+	/*
+	 * public ContactsPage clickOnContactsLink(){ contactsLink.click(); return new
+	 * ContactsPage(); }
+	 * 
+	 * public DealsPage clickOnDealsLink(){ dealsLink.click(); return new
+	 * DealsPage(); }
+	 * 
+	 * public TasksPage clickOnTasksLink(){ tasksLink.click(); return new
+	 * TasksPage(); }
+	 * 
+	 * public void clickOnNewContactLink(){ Actions action = new Actions(driver);
+	 * action.moveToElement(contactsLink).build().perform(); newContactLink.click();
+	 */
 
 }

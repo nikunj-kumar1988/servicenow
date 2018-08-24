@@ -9,7 +9,6 @@ import org.testng.ITestResult;
 
 import com.atos.servicenow.base.TestBase;
 import com.atos.servicenow.extent.ExtentManager;
-import com.atos.servicenow.util.TestUtil;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
