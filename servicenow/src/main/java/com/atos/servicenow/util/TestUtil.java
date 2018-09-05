@@ -90,7 +90,7 @@ public class TestUtil extends TestBase {
 				// Print Excel data in console
 				System.out.print(row.getCell(j).getStringCellValue() + "|| ");
 			}
-			System.out.println();
+			System.out.println("hi");
 		}
 	}
 
