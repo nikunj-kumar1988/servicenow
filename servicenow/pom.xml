@@ -9,14 +9,25 @@
 	<packaging>jar</packaging>
 
 	<name>servicenow</name>
+	<description>This is Nikunj's Servicenow Framework</description>
 	<url>http://maven.apache.org</url>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<!-- Update the java version of the project -->
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
 
+	<repositories>
+		<repository>
+			<id>atlassian</id>
+			<name>Atlassian Repository</name>
+			<url>https://maven.atlassian.com/content/repositories/atlassian-public/</url>
+		</repository>
+
+
+	</repositories>
 	<dependencies>
 		<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
 		<dependency>
@@ -130,5 +141,14 @@
 			<version>2.11.1</version>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/com.atlassian.mail/atlassian-mail -->
+		<dependency>
+			<groupId>com.atlassian.mail</groupId>
+			<artifactId>atlassian-mail</artifactId>
+			<version>4.0.6</version>
+		</dependency>
+
 	</dependencies>
+	
+	
 </project>
