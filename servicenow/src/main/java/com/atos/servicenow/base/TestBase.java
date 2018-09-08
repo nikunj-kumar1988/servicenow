@@ -45,6 +45,20 @@ public class TestBase {
 			e.printStackTrace();
 		}
 	}
+	
+	public static String takeScreenshotAtEndOfTest(String name) throws IOException {
+		File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+		String currentDir = System.getProperty("user.dir");
+		
+		String dateName = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+		String destination = currentDir + "\\screenshots\\" + name + "_" + dateName + ".png";
+		System.out.println("Destination " + destination);
+		
+		File destFile = new File(destination);
+		FileUtils.copyFile(scrFile, destFile);
+		return destination;
+
+	}
 
 	public static void initialization() {
 		String browserName = prop.getProperty("browser");
@@ -76,22 +90,11 @@ public class TestBase {
 		driver.manage().timeouts().implicitlyWait(TestUtil.IMPLICIT_WAIT, TimeUnit.SECONDS);
 
 		driver.get(prop.getProperty("url"));
+		System.out.println("Test Conflict and merge on master branch");
 	}
 	
 
-	public static String takeScreenshotAtEndOfTest(String name) throws IOException {
-		File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-		String currentDir = System.getProperty("user.dir");
-		
-		String dateName = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
-		String destination = currentDir + "\\screenshots\\" + name + "_" + dateName + ".png";
-		System.out.println("Destination " + destination);
-		
-		File destFile = new File(destination);
-		FileUtils.copyFile(scrFile, destFile);
-		return destination;
-
-	}
+	
 
 
 }
